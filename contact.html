@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Victor Alamo - Contact</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="navbar"></div>
+  <script>
+    fetch("navbar.html")
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById("navbar").innerHTML = data;
+
+        // hamburger menu toggle
+        const toggle = document.querySelector(".menu-toggle");
+        const navlinks = document.querySelector(".nav-links");
+
+        toggle.addEventListener("click", () => {
+          navlinks.classList.toggle("show");
+        });
+
+        // highlight active link after navbar is loaded
+        const current = window.location.pathname.split("/").pop(); 
+        const links = document.querySelectorAll("#navbar ul a");
+        links.forEach(link => {
+          if (link.getAttribute("href") === current) {
+            link.classList.add("active");
+          }
+        });
+      });
+  </script>
+
+  <main>
+    <div style="width:100%; max-width:300px; margin: 0 auto;">
+      <h1>Contact</h1>
+      <p style="font-size: 1.5rem;">contact@victoralamo.com</p>
+      <a href="mailto:contact@victoralamo.com" target="_blank" style="width: 44px; height: 44px;"><img src="https://ssl.gstatic.com/atari/images/sociallinks/email_gray_44dp.png" alt="Email" style="width: 44px; height: 44px;" width="44" height="44"></a>
+      <a href="https://www.youtube.com/@victoralamo" target="_blank" style="width: 44px; height: 44px;"><img src="https://ssl.gstatic.com/atari/images/sociallinks/youtube_gray_44dp.png" alt="YouTube" style="width: 44px; height: 44px;" width="44" height="44"></a>
+    </div>
+  </main>
+
+</body>
+</html>

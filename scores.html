@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Victor Alamo - Scores</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="navbar"></div>
+  <script>
+    fetch("navbar.html")
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById("navbar").innerHTML = data;
+
+        // hamburger menu toggle
+        const toggle = document.querySelector(".menu-toggle");
+        const navlinks = document.querySelector(".nav-links");
+
+        toggle.addEventListener("click", () => {
+          navlinks.classList.toggle("show");
+        });
+
+        // highlight active link after navbar is loaded
+        const current = window.location.pathname.split("/").pop(); 
+        const links = document.querySelectorAll("#navbar ul a");
+        links.forEach(link => {
+          if (link.getAttribute("href") === current) {
+            link.classList.add("active");
+          }
+        });
+      });
+  </script>
+
+  <main>
+    <div style="width:100%; max-width:640px; margin: 0 auto;">
+     <table style="width:100%;">
+        <tr>
+          <td width="50%">
+            <img width=100% src="Little piano pieces.jpg" role="img">
+          </td>
+          <td style="min-width:300px">
+            <h1>Little piano pieces</h1>
+            <p>A collection of minimalist piano pieces.<br>Available in PDF or as a printed book.</p>
+            <a href="https://www.amazon.com/dp/B0CY2CLN5X" target="_blank" style="display:inline-block; margin:10px 0; text-decoration: none; color: black; border: 2px solid black; padding: 10px; border-radius: 5px; font-weight: bold;">Purchase printed book</a>
+            <a href="https://payhip.com/b/3u0r4" target="_blank" style="display:inline-block; margin:10px 0; text-decoration: none; color: black; border: 2px solid black; padding: 10px; border-radius: 5px; font-weight: bold;">Purchase pdf</a>
+          </td>
+        </tr>
+        </table>
+    </div>
+  </main>
+
+</body>
+</html>

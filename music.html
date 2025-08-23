@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Victor Alamo - Music</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Major+Mono+Display&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Cinzel:wght@400..900&family=Major+Mono+Display&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Cinzel:wght@400..900&family=Major+Mono+Display&family=Zen+Kurenaido&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="navbar"></div>
+  <script>
+    fetch("navbar.html")
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById("navbar").innerHTML = data;
+
+        // hamburger menu toggle
+        const toggle = document.querySelector(".menu-toggle");
+        const navlinks = document.querySelector(".nav-links");
+
+        toggle.addEventListener("click", () => {
+          navlinks.classList.toggle("show");
+        });
+        
+        // highlight active link after navbar is loaded
+        const current = window.location.pathname.split("/").pop(); 
+        const links = document.querySelectorAll("#navbar ul a");
+        links.forEach(link => {
+          if (link.getAttribute("href") === current) {
+            link.classList.add("active");
+          }
+        });
+      });
+  </script>
+
+  <script src="https://player.vimeo.com/api/player.js"></script>
+  <main>
+    <h1 style="text-align:center">Featured compositions</h1>
+    <div style="width:100%; max-width:1300px; margin: 0 auto;">
+      <iframe src="https://player.vimeo.com/video/1111042383?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" style="margin-top:50px;top:0;left:0;width:100%;aspect-ratio:2;" title="La noia i la mar"></iframe>
+      <iframe src="https://player.vimeo.com/video/1103799778?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" style="margin-top:100px;top:0;left:0;width:100%;aspect-ratio:2;" title="The language of water"></iframe>
+      <table style="width:100%; max-width:650px; margin:100px auto 0; margin-top:100px;">
+        <tr>
+          <td width="50%">
+            <iframe src="https://player.vimeo.com/video/917026865?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" style="top:0;left:0;width:100%;height:100%;" title="Victor Alamo - Moon and soul"></iframe>
+          </td>
+          <td style="line-height: 0.5;">
+            <h1 style="font-family: 'Caveat';">Soul</h1>
+            <p>Solo piano</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <iframe src="https://player.vimeo.com/video/917023274?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" style="top:0;left:0;width:100%;height:100%;" title="Victor Alamo - Uplift"></iframe>
+          </td>
+          <td style="line-height: 0.5;">
+            <h1 style="font-family: 'Zen Kurenaido';">Uplift</h1>
+            <p>Piano and small ensemble</p>
+          </td>
+        </tr>
+         <tr>
+          <td>
+            <iframe src="https://player.vimeo.com/video/917031477?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" style="top:0;left:0;width:100%;height:100%;" title="Victor Alamo - Equilibrium"></iframe>
+          </td>
+          <td style="line-height: 0.5;">
+            <h1 style="font-family: 'Cinzel';">Equilibrium</h1>
+            <p>Orchestra</p>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding-top: 40px;">
+            <div align="center">
+              <iframe scrolling="no" style="margin-top:30px; border: 0; width: 230px; height: 230px; overflow: hidden;" src="https://bandcamp.com/EmbeddedPlayer/album=1111767708/size=large/bgcol=ffffff/linkcol=333333/minimal=true/transparent=true/" seamless></iframe>
+            </div>
+          </td>
+          <td style="padding-top: 40px;">
+            <h1 style="font-family: 'Major Mono Display'; font-weight: 100; margin-bottom: 0rem;">cosmophony</h1>
+            <p style="margin-top: 0rem;">Astrophysics and music meet in this album.</p>
+            <p>A journey through the universe and a reflection about existence.</p>
+            <p><b>Find the album <a href="https://victoralamo.bandcamp.com/album/cosmophony" target="_blank" style="text-decoration: underline; color:black">here</a></b></p>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </main>
+
+</body>
+</html>

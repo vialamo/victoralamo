@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Victor Alamo - Blog</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="navbar"></div>
+  <script>
+    fetch("navbar.html")
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById("navbar").innerHTML = data;
+
+        // hamburger menu toggle
+        const toggle = document.querySelector(".menu-toggle");
+        const navlinks = document.querySelector(".nav-links");
+
+        toggle.addEventListener("click", () => {
+          navlinks.classList.toggle("show");
+        });
+
+        // highlight active link after navbar is loaded
+        const current = window.location.pathname.split("/").pop(); 
+        const links = document.querySelectorAll("#navbar ul a");
+        links.forEach(link => {
+          if (link.getAttribute("href") === current) {
+            link.classList.add("active");
+          }
+        });
+      });
+  </script>
+
+  <main>
+    <div style="width:100%; max-width:550px; margin: 0 auto; text-align: justify;">
+      <h1>The little girl</h1>
+      <p style="font-family:arial;font-size: 1.0rem">March 3, 2024</p>
+      <p>This is the story behind my theme <em>The little girl</em>.</p>
+      <p>I often walk or run in the countryside near my place to find peace or get inspired. One morning I was there and witnessed a scene.</p>
+      <p>Near the country lane, a horse and a man were farming a field. A car stopped next to them. The rear window opened and a little girl with a pacifier, about one year old, peered out to see the horse. The farmer noticed and approached the car to introduce the horse to her. The girl was amazed. It might be the first time she saw one.</p>
+      <p>The scene was delightful, but there was something more. The few other cars on that lane couldn’t pass because it wasn’t wide enough, so they had to wait. And at that time of day they were probably rushing to work. Yet, no one honked or said anything.</p>
+      <p>I like to think that we all thought that the moment was worth it. Isn’t the point of our civilization and all the rushing through our duties precisely to allow for this kind of meaningful moments?  What are we rushing into otherwise? These thoughts came with me for the rest of the walk.</p>
+      <p>Once at home I sat at the piano and without much thinking <em>The little girl</em> theme happened. Pure and simple.</p>
+      <p>And that’s it. You can find the score as part of my <em><a href="scores.html" style="color:black">Little piano pieces</a></em> book. Or just send me an email and I’ll send it to you.</p>
+      <br>
+      <h1>The journey of Cosmophony</h1>
+      <p style="font-family:arial;font-size: 1.0rem">August 17, 2023</p>
+      <p>My music is different from time to time, but it all has one thing in common: composing it is a journey for me. This is the story of my album <em><a href="https://victoralamo.bandcamp.com/album/cosmophony" style="color:black">Cosmophony</a></em>.</p>
+      <p>It all started after reading a few introductory books on astrophysics. I was very excited about all I had learned and felt inspired to create an album.</p>
+      <p>It took me around three months to complete it. Immersed in my studio I lived the many adventures that the music narrates: witnessing the birth of a star, passing by a neutron star (a personal favorite)…</p>
+      <p>But this journey would change my life. The unexpected began when I decided that the closing theme would be about the end of the universe. Some research made me realize that chances are humanity won’t be there forever—the universe as we know it will not.</p>
+      <p>For me this was relevant. I had always assumed an eternal humanity that would evolve into a wise and virtuous civilization. With every decision I made, big or small, I tried to drive us into becoming this elevated species. This was my North, my purpose.</p>
+      <p>However, an ephemeral humanity compromised this grandiose idea of purpose. To me, ephemeral meant meaningless.</p>
+      <p>I felt myself floating in a void. The ground I was walking on had never been there. I continued doing everything—early mornings, physical activity...—but I was uninspired. I didn’t see a reason for it.</p>
+      <p>It took me time to accept I was not serving a higher purpose and to learn to appreciate a humbler existence. This was a profound transformation.</p>
+      <p>It got reflected in the music. I added a theme titled <em>Humanity, existence and meaning</em> to <em>Cosmophony</em>. I removed it later in a revision because it was off topic for anyone but me, but an old version of the album with the theme can be found <a href="https://www.youtube.com/watch?v=xbTkrzSV1hw&t=2192s" style="color:black">here</a>.</p>
+      <p>What started just as an exciting reading about the universe eventually transcended into a life changing journey. At the beginning it was scary. Over time, I realized it made me free.</p>
+      <br>
+      <h1>Inspiration, creative process and spirituality</h1>
+      <p style="font-family:arial;font-size: 1.0rem">July 29, 2023</p>
+      <p>Most of the time my music is a result of intention and work. But there are times when I’m not as much in control: it comes without asking and it is whatever it wants. At best, my creative process is not entirely conscious.</p>
+      <p>Here’s one way in which my music “happens” on its own.</p>
+      <p>Whenever I’m feeling in some way, I sit at the piano to try to balance myself. I don’t know what keys I should press to find that balance, but I have a sense of “like this” and “not like this” as my fingers flow through different things. The piano becomes my blind person’s cane to figure out myself.</p>
+      <p>From the things that are “like this”, a piece of music emerges. Once there, I may see what triggered it: that walk on that cloudy day, that friendly cat I met in the park, that conversation… And the music tells why. The cloudy walk was solitude. The friendly cat was gratitude. The conversation was connection. I wouldn’t know any of this when I sat at the piano.</p>
+      <p>It’s fascinating. My inner self is days ahead of me, and we communicate through music. This form of creative process reflects, but also is, a spiritual walk.</p>
+    </div>
+  </main>
+
+</body>
+</html>
