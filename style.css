@@ -113,6 +113,7 @@ h1 {
 
   .nav-links.show {
     display: flex; /* toggle menu */
+    gap: 0.5rem;  /* <-- this controls vertical spacing */
   }
 }
 
