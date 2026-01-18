@@ -1,7 +1,8 @@
 /* Reset default margins */
 body {
   margin: 0;
-  font-family: 'Lato Light', Arial, sans-serif;
+  font-family: 'Lato', Arial, sans-serif;
+  font-weight: 300; /* Light */
   font-size: 1.2rem;
   line-height: 1.6;
 }
