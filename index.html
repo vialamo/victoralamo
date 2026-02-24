@@ -10,6 +10,67 @@
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <style>
+    #visualizer {
+      position: absolute;
+      top: 0;
+      left: 5%;
+      width: 90%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none; /* Lets clicks pass through to the button */
+    }
+
+
+    /* Container for the UI elements */
+    .content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+    }
+
+    /* Minimalist Play/Pause Button */
+    .play-btn {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: transparent;
+      border: none;
+      color: #888;
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 10px;
+      transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+      outline: none;
+      z-index: 10;
+    }
+
+    .play-btn.center-large {
+      bottom: calc(50% - 2rem); /* Move to center, adjusting for size */
+      left: 50%;
+      font-size: 4rem;
+      opacity: 0.8;
+    }
+
+    .play-btn.center-large:hover {
+      transform: translateX(-50%) scale(1.1);
+      opacity: 1;
+    }
+
+    .play-btn:hover {
+      opacity: 0.6;
+    }
+
+    /* Hidden audio element */
+    #bg-audio {
+      display: none;
+    }
+  </style>
 </head>
 <body>
   <div id="navbar"></div>
@@ -29,10 +90,194 @@
       });
   </script>
 
-  <main>
-    <iframe src="https://player.vimeo.com/video/919230357?badge=0&amp;autoplay=1&amp;autopause=0&amp;player_id=0&amp;app_id=58479" allow="autoplay" frameborder="0" style="position:absolute;top:30%;left:0;width:100%;height:300px;" title="Moon and soul"></iframe>
-    <script src="https://player.vimeo.com/api/player.js"></script>
-  </main>
+  <!-- The Animated Canvas -->
+  <canvas id="visualizer"></canvas>
 
+  <!-- Hidden Audio Player (Autoplay enabled) -->
+  <audio id="bg-audio" crossorigin="anonymous" autoplay>
+    <source src="audio/Victor Alamo - Moon and soul.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Minimalist Button at the bottom -->
+  <button class="play-btn" id="play-btn" aria-label="Play/Pause Music">
+    &#10074;&#10074; <!-- Unicode Pause Icon (Default state for autoplay) -->
+  </button>
+
+  <script>
+    const audio = document.getElementById('bg-audio');
+    const playBtn = document.getElementById('play-btn');
+    const canvas = document.getElementById('visualizer');
+    const ctx = canvas.getContext('2d');
+
+    let audioContext;
+    let analyser;
+    let source;
+    let isInitialized = false;
+    let idleOffset = 0; // Tracks the idle animation movement
+
+    // Set canvas to full window size
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    // Setup Web Audio API
+    function initAudio() {
+      if (isInitialized) return;
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      audioContext = new AudioContext();
+      
+      analyser = audioContext.createAnalyser();
+      analyser.fftSize = 2048; // Determines the smoothness/resolution of the line
+
+      source = audioContext.createMediaElementSource(audio);
+
+      // Create a Low-Pass Filter to remove fast/high frequencies from the visualizer
+      const filter = audioContext.createBiquadFilter();
+      filter.type = 'lowpass';
+      filter.frequency.value = 1760; // HZ cutoff
+
+      // Route the pristine, full audio to the speakers so the music sounds normal
+      source.connect(audioContext.destination);
+
+      source.connect(filter);
+      filter.connect(analyser);
+
+      isInitialized = true;
+    }
+
+    // Sync button icon with the actual audio state
+    audio.addEventListener('play', () => {
+      playBtn.innerHTML = '&#10074;&#10074;'; // Pause Icon
+      playBtn.classList.remove('center-large'); // Shrink and slide to bottom
+      if (audioContext && audioContext.state === 'suspended') {
+        audioContext.resume();
+      }
+    });
+
+    audio.addEventListener('pause', () => {
+      playBtn.innerHTML = '&#9654;'; // Play Icon
+    });
+
+    // Toggle Play/Pause on click
+    playBtn.addEventListener('click', () => {
+      if (!isInitialized) {
+        initAudio();
+      }
+
+      if (audio.paused) {
+        audio.play();
+      } else {
+        audio.pause();
+      }
+    });
+
+    // Attempt autoplay immediately (Browsers often block this unless the user has interacted)
+    audio.play().then(() => {
+      initAudio(); // Success! Initialize the visualizer
+    }).catch((err) => {
+      // Autoplay was blocked. Update the button to show "Play" so the user can start it manually
+      console.log("Autoplay blocked by browser. Awaiting user interaction.");
+      playBtn.innerHTML = '&#9654;';
+      playBtn.classList.add('center-large'); // Make it large and central
+    });
+
+    // Initialize audio on any first click to ensure context resumes properly
+    window.addEventListener('click', () => {
+      if (!isInitialized) initAudio();
+    }, { once: true });
+
+    // Start the animation loop immediately
+    drawVisualizer();
+
+    // The Animation Loop
+    function drawVisualizer() {
+      requestAnimationFrame(drawVisualizer);
+
+      // Clear the canvas for the next frame
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Line style
+      ctx.lineWidth = 1.5;
+
+      // Create horizontal fade gradient
+      const gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
+      gradient.addColorStop(0, 'rgba(51, 51, 51, 0)');
+      gradient.addColorStop(0.25, 'rgba(51, 51, 51, 0.4)');
+      gradient.addColorStop(0.5, 'rgba(51, 51, 51, 0.6)');
+      gradient.addColorStop(0.75, 'rgba(51, 51, 51, 0.4)');
+      gradient.addColorStop(1, 'rgba(51, 51, 51, 0)');
+
+      ctx.strokeStyle = gradient;
+
+      const points = [];
+
+      // IDLE STATE: Draw a gentle sine wave if audio is paused or not initialized
+      if (!isInitialized || audio.paused) {
+        idleOffset += 0.02;
+        let x = 0;
+        const sliceWidth = canvas.width / 100;
+        for (let i = 0; i <= 100; i++) {
+          const y = (canvas.height / 2) + Math.sin((i * 0.05) + idleOffset) * 15;
+          points.push({x, y});
+          x += sliceWidth;
+        }
+      } else {
+        // ACTIVE STATE: Real audio waveform data
+        const bufferLength = analyser.frequencyBinCount;
+        
+        // Use Float32Array to eliminate 8-bit quantization (which causes the horizontal "pixelated" stair-steps)
+        const dataArray = new Float32Array(bufferLength);
+        
+        if (analyser.getFloatTimeDomainData) {
+          analyser.getFloatTimeDomainData(dataArray);
+        } else {
+          // Fallback for very old browsers
+          const byteData = new Uint8Array(bufferLength);
+          analyser.getByteTimeDomainData(byteData);
+          for (let i = 0; i < bufferLength; i++) {
+            dataArray[i] = (byteData[i] - 128) / 128.0;
+          }
+        }
+
+        const sliceWidth = canvas.width * 1.0 / bufferLength;
+        let x = 0;
+
+        for (let i = 0; i < bufferLength; i++) {
+          // Float data ranges from -1.0 to 1.0. Multiply by 1.5 to keep your wave height boost
+          const v = dataArray[i] * 1.5; 
+          
+          // Calculate the Y position
+          const waveHeight = canvas.height / 3; 
+          const y = (canvas.height / 2) + (v * waveHeight);
+
+          points.push({x, y});
+          x += sliceWidth;
+        }
+      }
+
+      // DRAW THE SPLINE: Smoothly connect the points using quadratic curves
+      ctx.beginPath();
+      if (points.length > 0) {
+        ctx.moveTo(points[0].x, points[0].y);
+        
+        for (let i = 0; i < points.length - 1; i++) {
+          // Calculate the midpoint between current point and next point
+          const xc = (points[i].x + points[i + 1].x) / 2;
+          const yc = (points[i].y + points[i + 1].y) / 2;
+          
+          // Draw a mathematically perfect curve to that midpoint
+          ctx.quadraticCurveTo(points[i].x, points[i].y, xc, yc);
+        }
+        
+        // Draw the very last segment
+        ctx.lineTo(points[points.length - 1].x, points[points.length - 1].y);
+      }
+
+      ctx.stroke();
+    }
+  </script>
 </body>
 </html>
