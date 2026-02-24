@@ -63,16 +63,6 @@
       }
     }
 
-    function toggleIndicator(audioEl, isPlaying) {
-      const row = audioEl.closest('.player-row');
-      const indicator = row.querySelector('.playing-indicator');
-      if (isPlaying) {
-        indicator.classList.add('active');
-      } else {
-        indicator.classList.remove('active');
-      }
-    }
-
     // Automatically pause all other audio players when a new one starts
     document.addEventListener('play', function(e) {
       if (e.target.tagName === 'AUDIO') {
