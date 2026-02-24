@@ -19,6 +19,7 @@ h1 {
 
 h2 {
   font-weight: 400;
+  font-family: 'Lato', Arial, sans-serif;
 }
 
 /* Navigation bar */
@@ -224,7 +225,7 @@ audio::-webkit-media-controls-panel {
 /* 🔽 Responsive layout */
 @media (max-width: 600px) {
   .navbar {
-    padding: 0.2rem 0.1rem; /* shrink side padding */
+    padding: 0.2rem 1rem; /* shrink side padding */
   }
 
   .navbar ul {
@@ -235,20 +236,20 @@ audio::-webkit-media-controls-panel {
     display: block; /* show the hamburger */
   }
 
-  .nav-links {
+  .navbar .nav-links {
     display: none; /* hidden by default */
     flex-direction: column;
     position: absolute;
     top: 60px; /* below navbar */
     right: 0;
     background: #fff;
-    padding: 1rem;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 1rem 1rem;
+    box-shadow: -2px 5px 10px rgba(0,0,0,0.1);
   }
 
-  .nav-links.show {
+  .navbar .nav-links.show {
     display: flex; /* toggle menu */
-    gap: 0.5rem;  /* <-- this controls vertical spacing */
+    gap: 1rem;  /* <-- this controls vertical spacing */
   }
 }
 
