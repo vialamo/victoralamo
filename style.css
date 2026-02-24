@@ -126,6 +126,11 @@ h2 {
   display: block;
 }
 
+/* Let the user know the image is clickable */
+.score-img.enlargeable {
+  cursor: zoom-in;
+}
+
 /* Elegant Navigation Arrows */
 .nav-btn {
   position: absolute;
@@ -208,4 +213,76 @@ audio::-webkit-media-controls-panel {
 /* Main content padding */
 main {
   padding: 2rem;
+}
+
+
+/* ---------------------------------
+   LIGHTBOX STYLES
+------------------------------------ */
+.lightbox {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.95); /* Elegant translucent white background */
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(5px); /* Softly blurs the website behind it */
+}
+
+.lightbox-content {
+  position: relative;
+  width: 95%;
+  height: 95%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* Ensures the whole page fits without stretching */
+  box-shadow: 0 15px 50px rgba(0,0,0,0.15); /* Adds a nice depth effect */
+  border-radius: 4px;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 3rem;
+  color: #666;
+  cursor: pointer;
+  background: none;
+  border: none;
+  z-index: 10000;
+  transition: color 0.3s ease;
+}
+
+.lightbox-close:hover {
+  color: #000;
+}
+
+/* Adapt the navigation arrows specifically for the Lightbox */
+.lightbox-nav {
+  position: static;
+  width: auto;
+  padding: 0 30px;
+  height: auto;
+  color: #aaa;
+}
+
+.lightbox-nav:hover {
+  color: #333;
+  background: transparent;
+}
+
+@media (max-width: 800px) {
+  .lightbox-nav {
+    padding: 0 10px;
+  }
 }

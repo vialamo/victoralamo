@@ -63,6 +63,51 @@
       }
     }
 
+    /* --- LIGHTBOX LOGIC --- */
+    let activeLightboxSection = null;
+
+    function openLightbox(sectionId) {
+      activeLightboxSection = sectionId;
+      const section = document.getElementById(sectionId);
+      const img = section.querySelector('.score-img');
+      const lightbox = document.getElementById('score-lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      
+      // Copy current image to lightbox
+      lightboxImg.src = img.src;
+      
+      // Show lightbox and lock background scrolling
+      lightbox.style.display = 'flex';
+      document.body.style.overflow = 'hidden'; 
+    }
+
+    function closeLightbox() {
+      document.getElementById('score-lightbox').style.display = 'none';
+      document.body.style.overflow = ''; // Restore background scrolling
+      activeLightboxSection = null;
+    }
+
+    function flipLightbox(direction) {
+      if (!activeLightboxSection) return;
+      
+      // Flip the underlying original inline page
+      flipPage(activeLightboxSection, direction);
+      
+      // Sync the lightbox image to the newly flipped inline image
+      const section = document.getElementById(activeLightboxSection);
+      const img = section.querySelector('.score-img');
+      document.getElementById('lightbox-img').src = img.src;
+    }
+
+    // Allow keyboard navigation in the lightbox
+    document.addEventListener('keydown', function(e) {
+      if (document.getElementById('score-lightbox').style.display === 'flex') {
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') flipLightbox(-1);
+        if (e.key === 'ArrowRight') flipLightbox(1);
+      }
+    });
+
     // Automatically pause all other audio players when a new one starts
     document.addEventListener('play', function(e) {
       if (e.target.tagName === 'AUDIO') {
@@ -85,7 +130,9 @@
       <section class="composition-block" id="noia-section">
         <div class="score-container">
           <div class="score-viewport">
-            <img class="score-img" 
+            <img class="score-img enlargeable" 
+                onclick="openLightbox('noia-section')"
+                title="Click to enlarge"
                 src="scores/Noia-1.svg" 
                 data-base="Noia" 
                 data-current="1" 
@@ -106,7 +153,9 @@
       <section class="composition-block" id="water-section">
         <div class="score-container">
           <div class="score-viewport">
-            <img class="score-img" 
+            <img class="score-img enlargeable" 
+                onclick="openLightbox('water-section')"
+                title="Click to enlarge"
                 src="scores/Water-1.svg" 
                 data-base="Water" 
                 data-current="1" 
@@ -127,7 +176,9 @@
       <section class="composition-block" id="fada-section">
         <div class="score-container">
           <div class="score-viewport">
-            <img class="score-img" 
+            <img class="score-img enlargeable" 
+                onclick="openLightbox('fada-section')"
+                title="Click to enlarge"
                 src="scores/Fada-1.svg" 
                 data-base="Fada" 
                 data-current="1" 
@@ -172,5 +223,17 @@
       </table>
     </div>
   </main>
+
+  <!-- THE LIGHTBOX OVERLAY -->
+  <div id="score-lightbox" class="lightbox" onclick="closeLightbox()">
+    <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+    
+    <!-- Stop propagation so clicking the image/buttons doesn't trigger the close function -->
+    <div class="lightbox-content" onclick="event.stopPropagation()">
+      <button class="nav-btn prev lightbox-nav" onclick="flipLightbox(-1)">&#10094;</button>
+      <img id="lightbox-img" class="lightbox-img" src="" alt="Enlarged Score">
+      <button class="nav-btn next lightbox-nav" onclick="flipLightbox(1)">&#10095;</button>
+    </div>
+  </div>
 </body>
 </html>
