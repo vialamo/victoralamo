@@ -40,16 +40,132 @@
       });
   </script>
 
-  <script src="https://player.vimeo.com/api/player.js"></script>
+  <script>
+    function flipPage(containerId, direction) {
+      const container = document.getElementById(containerId);
+      const img = container.querySelector('.score-img');
+
+      // Pull settings from the data attributes
+      const baseName = img.getAttribute('data-base');
+      const totalPages = parseInt(img.getAttribute('data-total'));
+      let current = parseInt(img.getAttribute('data-current'));
+
+      // Calculate next page
+      let next = current + direction;
+
+      // Logic: Only flip if within bounds (1 to total)
+      if (next >= 1 && next <= totalPages) {
+          // 1. Update the image source to your format
+          img.src = `scores/${baseName}-${next}.svg`;
+          
+          // 2. Update the internal tracker
+          img.setAttribute('data-current', next);
+      }
+    }
+
+    function toggleIndicator(audioEl, isPlaying) {
+      const row = audioEl.closest('.player-row');
+      const indicator = row.querySelector('.playing-indicator');
+      if (isPlaying) {
+        indicator.classList.add('active');
+      } else {
+        indicator.classList.remove('active');
+      }
+    }
+
+    // Automatically pause all other audio players when a new one starts
+    document.addEventListener('play', function(e) {
+      if (e.target.tagName === 'AUDIO') {
+        const audios = document.querySelectorAll('audio');
+        audios.forEach(audio => {
+          if (audio !== e.target) {
+            audio.pause();
+          }
+        });
+      }
+    }, true); // 'true' uses the capture phase, which is required since 'play' events don't bubble
+  </script>
+
   <main>
     <h1 style="text-align:center">Featured compositions</h1>
     <div style="width:100%; max-width:1300px; margin: 0 auto;">
-      <iframe src="https://player.vimeo.com/video/1111042383?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" style="margin-top:50px;top:0;left:0;width:100%;aspect-ratio:2;" title="La noia i la mar"></iframe>
-      <iframe src="https://player.vimeo.com/video/1103799778?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" style="margin-top:100px;top:0;left:0;width:100%;aspect-ratio:2.25;" title="The language of water"></iframe>
+
+      <!-- La noia i la mar -->
+      <section class="composition-block" id="noia-section">
+        <div class="score-container">
+          <div class="score-viewport">
+            <img class="score-img" 
+                src="scores/Noia-1.svg" 
+                data-base="Noia" 
+                data-current="1" 
+                data-total="5" 
+                alt="Noia Score">
+            
+            <button class="nav-btn prev" onclick="flipPage('noia-section', -1)">&#10094;</button>
+            <button class="nav-btn next" onclick="flipPage('noia-section', 1)">&#10095;</button>
+          </div>
+
+          <audio controls controlsList="noplaybackrate nodownload" preload="none" class="custom-player">
+            <source src="audio/Victor Alamo - La noia i la mar.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+      </section>
+
+      <!-- Language of water -->
+      <section class="composition-block" id="water-section">
+        <div class="score-container">
+          <div class="score-viewport">
+            <img class="score-img" 
+                src="scores/Water-1.svg" 
+                data-base="Water" 
+                data-current="1" 
+                data-total="9" 
+                alt="Water Score">
+            
+            <button class="nav-btn prev" onclick="flipPage('water-section', -1)">&#10094;</button>
+            <button class="nav-btn next" onclick="flipPage('water-section', 1)">&#10095;</button>
+          </div>
+
+          <audio controls controlsList="noplaybackrate nodownload" preload="none" class="custom-player">
+            <source src="audio/Victor Alamo - The language of water.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+      </section>
+
+      <!-- Fada i Nina -->
+      <section class="composition-block" id="fada-section">
+        <div class="score-container">
+          <div class="score-viewport">
+            <img class="score-img" 
+                src="scores/Fada-1.svg" 
+                data-base="Fada" 
+                data-current="1" 
+                data-total="15" 
+                alt="Fada Score">
+            
+            <button class="nav-btn prev" onclick="flipPage('fada-section', -1)">&#10094;</button>
+            <button class="nav-btn next" onclick="flipPage('fada-section', 1)">&#10095;</button>
+          </div>
+
+          <audio controls controlsList="noplaybackrate nodownload" preload="none" class="custom-player">
+            <source src="audio/Victor Alamo - Fada i Nina.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+      </section>
+
       <table style="width:100%; max-width:650px; margin:100px auto 0; margin-top:100px;">
         <tr>
           <td width="50%">
-            <iframe src="https://player.vimeo.com/video/917026865?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" style="top:0;left:0;width:100%;height:100%;" title="Victor Alamo - Moon and soul"></iframe>
+            <div class="player-row">
+              <audio controls controlsList="noplaybackrate nodownload" preload="none" class="small-player" onplay="toggleIndicator(this, true)" onpause="toggleIndicator(this, false)">
+                <source src="audio/Victor Alamo - Moon and soul.mp3" type="audio/mpeg">
+              </audio>
+              <div class="playing-indicator">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+              </div>
+            </div>
           </td>
           <td style="line-height: 0.5;">
             <h1 style="font-family: 'Caveat';">Soul</h1>
@@ -58,7 +174,16 @@
         </tr>
         <tr>
           <td>
-            <iframe src="https://player.vimeo.com/video/917023274?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" style="top:0;left:0;width:100%;height:100%;" title="Victor Alamo - Uplift"></iframe>
+            <div class="player-row">
+              <audio controls controlsList="noplaybackrate nodownload" preload="none" class="small-player" onplay="toggleIndicator(this, true)" onpause="toggleIndicator(this, false)">
+                <source src="audio/Victor Alamo - Uplift.mp3" type="audio/mpeg">
+              </audio>
+              <div class="playing-indicator">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+              </div>
+            </div>
           </td>
           <td style="line-height: 0.5;">
             <h1 style="font-family: 'Zen Kurenaido';">Uplift</h1>
@@ -67,7 +192,16 @@
         </tr>
          <tr>
           <td>
-            <iframe src="https://player.vimeo.com/video/917031477?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" style="top:0;left:0;width:100%;height:100%;" title="Victor Alamo - Equilibrium"></iframe>
+            <div class="player-row">
+              <audio controls controlsList="noplaybackrate nodownload" preload="none" class="small-player" onplay="toggleIndicator(this, true)" onpause="toggleIndicator(this, false)">
+                <source src="audio/Victor Alamo - Equilibrium.mp3" type="audio/mpeg">
+              </audio>
+              <div class="playing-indicator">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+              </div>
+            </div>
           </td>
           <td style="line-height: 0.5;">
             <h1 style="font-family: 'Cinzel';">Equilibrium</h1>
@@ -85,6 +219,17 @@
             <p style="margin-top: 0rem;">Astrophysics and music meet in this album.</p>
             <p>A journey through the universe and a reflection about existence.</p>
             <p><b>Find the album <a href="https://victoralamo.bandcamp.com/album/cosmophony" target="_blank" style="text-decoration: underline; color:black">here</a></b></p>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding-top: 40px;">
+            <img width=100% src="Little piano pieces.jpg" role="img">
+          </td>
+          <td style="min-width:300px; padding-top: 40px;">
+            <h1>Little piano pieces</h1>
+            <p>A collection of minimalist piano pieces.<br>Available in PDF or as a printed book.</p>
+            <a href="https://www.amazon.com/dp/B0CY2CLN5X" target="_blank" style="display:inline-block; margin:10px 0; text-decoration: none; color: black; border: 2px solid black; padding: 10px; border-radius: 5px; font-weight: bold;">Purchase printed book</a>
+            <a href="https://payhip.com/b/3u0r4" target="_blank" style="display:inline-block; margin:10px 0; text-decoration: none; color: black; border: 2px solid black; padding: 10px; border-radius: 5px; font-weight: bold;">Purchase pdf</a>
           </td>
         </tr>
       </table>

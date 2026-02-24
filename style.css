@@ -91,6 +91,139 @@ h2 {
   padding: 0;
 }
 
+
+/* Score Component Styles */
+    .composition-block {
+      max-width: 500px; /* Adjust this to control global score width */
+      margin: 0 auto 100px auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .score-container {
+      width: 100%; /* Ensures player and score are same width */
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    .score-viewport {
+      position: relative;
+      width: 100%;
+      background: white;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      border: 1px solid #eee;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .score-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* Elegant Navigation Arrows */
+    .nav-btn {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 12%; /* Wide hit area for easy clicking */
+      background: transparent;
+      border: none;
+      font-size: 2.5rem;
+      color: rgba(0,0,0,0.2);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+      z-index: 10;
+    }
+
+    .nav-btn:hover {
+      background: rgba(0,0,0,0.03);
+      color: rgba(0,0,0,0.8);
+    }
+
+    .prev { left: 0; }
+    .next { right: 0; }
+
+    /* The Audio Player - Set to 100% of the container */
+    .custom-player {
+      width: 100%;
+      height: 40px;
+      background-color: #ffffff;
+    }
+
+    audio::-webkit-media-controls-play-button,
+    audio::-webkit-media-controls-panel {
+     background-color: #ffffff;
+     color: #ffffff;
+     }
+
+     .small-player {
+      width: 120px;
+      height: 40px;
+    }
+
+    .small-player::-webkit-media-controls-volume-slider,
+    .small-player::-webkit-media-controls-mute-button,
+    .small-player::-webkit-media-controls-current-time-display,
+    .small-player::-webkit-media-controls-time-remaining-display,
+    /*.small-player::-webkit-media-controls-timeline,*/
+    .small-player::-webkit-media-controls-timeline-container,
+    .small-player::-webkit-media-controls-volume-control-container {
+        display: none;
+    }
+
+    /* Visual feedback for playing state (Equalizer effect) */
+    .playing-indicator {
+      display: flex;
+      align-items: flex-end;
+      gap: 2px;
+      height: 15px;
+      margin-left: 0px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .playing-indicator.active {
+      opacity: 1;
+    }
+
+    .bar {
+      width: 3px;
+      background: #96a0a7;
+      height: 100%;
+      animation: equalize 1s ease-in-out infinite;
+    }
+
+    .bar:nth-child(2) { animation-delay: 0.2s; }
+    .bar:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes equalize {
+      0% { height: 20%; }
+      50% { height: 100%; }
+      100% { height: 20%; }
+    }
+
+    .player-row {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      width: 100%;
+    }
+
+
+    @media (max-width: 600px) {
+      .composition-header h2 { font-size: 1.8rem; }
+      .nav-btn { font-size: 1.5rem; }
+    }
+
 /* 🔽 Responsive layout */
 @media (max-width: 600px) {
   .navbar {
