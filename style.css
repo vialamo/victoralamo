@@ -1,3 +1,7 @@
+:root {
+  color-scheme: light;
+}
+
 /* Reset default margins */
 body {
   margin: 0;
