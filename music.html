@@ -11,6 +11,22 @@
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* Hide the default slider thumb (ball) for the custom audio player */
+    .seek-bar::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 0;
+      height: 0;
+      background: transparent;
+    }
+    .seek-bar::-moz-range-thumb {
+      width: 0;
+      height: 0;
+      border: none;
+      background: transparent;
+    }
+  </style>
 </head>
 <body>
 

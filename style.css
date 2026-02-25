@@ -102,7 +102,69 @@ main {
 }
 
 /* =========================================
-   3. TEXT PAGES (ABOUT & BLOG)
+   3. LANDING PAGE (VISUALIZER)
+========================================= */
+#visualizer {
+  position: absolute;
+  top: 0;
+  left: 5%;
+  width: 90%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none; /* Lets clicks pass through to the button */
+}
+
+/* Container for the UI elements */
+.content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+/* Minimalist Play/Pause Button */
+.play-btn {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: transparent;
+  border: none;
+  color: #888;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 10px;
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  outline: none;
+  z-index: 10;
+}
+
+.play-btn.center-large {
+  bottom: calc(50% - 2rem); /* Move to center, adjusting for size */
+  left: 50%;
+  font-size: 4rem;
+  opacity: 0.8;
+}
+
+.play-btn.center-large:hover {
+  transform: translateX(-50%) scale(1.1);
+  opacity: 1;
+}
+
+.play-btn:hover {
+  opacity: 0.6;
+}
+
+/* Hidden audio element */
+#bg-audio {
+  display: none;
+}
+
+/* =========================================
+   4. TEXT PAGES (ABOUT & BLOG)
 ========================================= */
 .text-container {
   width: 100%;
