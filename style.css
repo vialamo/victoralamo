@@ -304,6 +304,8 @@ main {
 }
 
 .play-pause-btn {
+  -webkit-appearance: none;
+  appearance: none;
   background: transparent;
   border: none;
   font-size: 1.1rem;
@@ -315,6 +317,7 @@ main {
   align-items: center;
   justify-content: center;
   outline: none;
+  line-height: 0; /* Collapses the invisible text box tightly around the icon */
 }
 
 .play-pause-btn:hover {
