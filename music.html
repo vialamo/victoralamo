@@ -122,7 +122,6 @@
   </script>
 
   <main>
-    <!--<h2 style="text-align:center; font-style: italic; font-weight: 300;">Featured works</h2>-->
     <p class="section-subtitle">Featured works</p>
     <div class="gallery-container">
 
@@ -143,9 +142,17 @@
             <button class="nav-btn next" onclick="flipPage('noia-section', 1)">&#10095;</button>
           </div>
 
-          <audio controls controlsList="noplaybackrate nodownload" preload="none" class="custom-player">
-            <source src="audio/Victor Alamo - La noia i la mar.mp3" type="audio/mpeg">
-          </audio>
+          <!-- Custom Audio Player Structure -->
+          <div class="custom-audio-player">
+            <!-- Notice: No 'controls' attribute, so the browser player is invisible -->
+            <audio preload="metadata">
+              <source src="audio/Victor Alamo - La noia i la mar.mp3" type="audio/mpeg">
+            </audio>
+            <button class="play-pause-btn">&#9654;</button>
+            <div class="time-display"><span class="current-time">0:00</span> / <span class="duration">0:00</span></div>
+            <input type="range" class="seek-bar" value="0" max="100">
+          </div>
+
         </div>
       </section>
 
@@ -166,9 +173,16 @@
             <button class="nav-btn next" onclick="flipPage('water-section', 1)">&#10095;</button>
           </div>
 
-          <audio controls controlsList="noplaybackrate nodownload" preload="none" class="custom-player">
-            <source src="audio/Victor Alamo - The language of water.mp3" type="audio/mpeg">
-          </audio>
+          <!-- Custom Audio Player Structure -->
+          <div class="custom-audio-player">
+            <audio preload="metadata">
+              <source src="audio/Victor Alamo - The language of water.mp3" type="audio/mpeg">
+            </audio>
+            <button class="play-pause-btn">&#9654;</button>
+            <div class="time-display"><span class="current-time">0:00</span> / <span class="duration">0:00</span></div>
+            <input type="range" class="seek-bar" value="0" max="100">
+          </div>
+
         </div>
       </section>
 
@@ -189,22 +203,28 @@
             <button class="nav-btn next" onclick="flipPage('fada-section', 1)">&#10095;</button>
           </div>
 
-          <audio controls controlsList="noplaybackrate nodownload" preload="none" class="custom-player">
-            <source src="audio/Victor Alamo - Fada i Nina.mp3" type="audio/mpeg">
-          </audio>
+          <!-- Custom Audio Player Structure -->
+          <div class="custom-audio-player">
+            <audio preload="metadata">
+              <source src="audio/Victor Alamo - Fada i Nina.mp3" type="audio/mpeg">
+            </audio>
+            <button class="play-pause-btn">&#9654;</button>
+            <div class="time-display"><span class="current-time">0:00</span> / <span class="duration">0:00</span></div>
+            <input type="range" class="seek-bar" value="0" max="100">
+          </div>
+
         </div>
       </section>
-
 
       <div class="releases-container">
         
         <!-- Cosmophony -->
         <div class="release-item">
           <div class="release-media">
-            <iframe scrolling="no" style="border: 0; width: 230px; height: 230px; overflow: hidden;" src="https://bandcamp.com/EmbeddedPlayer/album=1111767708/size=large/bgcol=ffffff/linkcol=333333/minimal=true/transparent=true/" seamless></iframe>
+            <iframe class="bandcamp-iframe" scrolling="no" src="https://bandcamp.com/EmbeddedPlayer/album=1111767708/size=large/bgcol=ffffff/linkcol=333333/minimal=true/transparent=true/" seamless></iframe>
           </div>
           <div class="release-info">
-            <h1 style="font-family: 'Major Mono Display'; font-weight: 100; margin: 0;">cosmophony</h1>
+            <h1 class="cosmophony-title">cosmophony</h1>
             <p>Astrophysics and music meet in this album.<br>A journey through the universe.</p>
             <div class="button-group">
               <a href="https://victoralamo.bandcamp.com/album/cosmophony" target="_blank" class="elegant-btn">Listen on Bandcamp</a>
@@ -215,7 +235,6 @@
         <!-- Little Piano Pieces -->
         <div class="release-item">
           <div class="release-media">
-            <!-- Added a subtle box shadow to the book cover to match the score viewport style -->
             <img src="Little piano pieces.jpg" alt="Little piano pieces" class="release-img" style="padding-top:20px; margin-top:40px; padding-bottom:20px;">
           </div>
           <div class="release-info">
@@ -235,13 +254,76 @@
   <!-- THE LIGHTBOX OVERLAY -->
   <div id="score-lightbox" class="lightbox" onclick="closeLightbox()">
     <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
-    
-    <!-- Stop propagation so clicking the image/buttons doesn't trigger the close function -->
     <div class="lightbox-content" onclick="event.stopPropagation()">
       <button class="nav-btn prev lightbox-nav" onclick="flipLightbox(-1)">&#10094;</button>
       <img id="lightbox-img" class="lightbox-img" src="" alt="Enlarged Score">
       <button class="nav-btn next lightbox-nav" onclick="flipLightbox(1)">&#10095;</button>
     </div>
   </div>
+
+  <!-- Custom Player Logic -->
+  <script>
+    function formatTime(seconds) {
+      if (isNaN(seconds)) return "0:00";
+      const min = Math.floor(seconds / 60);
+      const sec = Math.floor(seconds % 60);
+      return min + ":" + (sec < 10 ? "0" + sec : sec);
+    }
+
+    document.querySelectorAll('.custom-audio-player').forEach(player => {
+      const audio = player.querySelector('audio');
+      const playBtn = player.querySelector('.play-pause-btn');
+      const currentTimeEl = player.querySelector('.current-time');
+      const durationEl = player.querySelector('.duration');
+      const seekBar = player.querySelector('.seek-bar');
+
+      // Update play/pause button
+      playBtn.addEventListener('click', () => {
+        if (audio.paused) {
+          audio.play();
+        } else {
+          audio.pause();
+        }
+      });
+
+      // Listeners to update the UI button state automatically
+      audio.addEventListener('play', () => {
+        playBtn.innerHTML = '&#10074;&#10074;'; // Pause icon
+      });
+
+      audio.addEventListener('pause', () => {
+        playBtn.innerHTML = '&#9654;'; // Play icon
+      });
+
+      // Load duration as soon as metadata is available
+      audio.addEventListener('loadedmetadata', () => {
+        durationEl.textContent = formatTime(audio.duration);
+        seekBar.max = Math.floor(audio.duration);
+      });
+
+      // Update time and progress bar as song plays
+      audio.addEventListener('timeupdate', () => {
+        currentTimeEl.textContent = formatTime(audio.currentTime);
+        seekBar.value = Math.floor(audio.currentTime);
+        
+        // Dynamically color the track so the left side gets dark as it progresses
+        const progress = (audio.currentTime / audio.duration) * 100 || 0;
+        seekBar.style.background = `linear-gradient(to right, #333 ${progress}%, #e0e0e0 ${progress}%)`;
+      });
+
+      // Seek when user drags the slider
+      seekBar.addEventListener('input', () => {
+        audio.currentTime = seekBar.value;
+      });
+
+      // Reset when finished
+      audio.addEventListener('ended', () => {
+        playBtn.innerHTML = '&#9654;';
+        audio.currentTime = 0;
+        seekBar.value = 0;
+        seekBar.style.background = '#e0e0e0';
+      });
+    });
+  </script>
 </body>
 </html>

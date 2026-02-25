@@ -1,12 +1,14 @@
+/* =========================================
+   1. GLOBAL & TYPOGRAPHY
+========================================= */
 :root {
-  color-scheme: light;
+  color-scheme: light; /* Ensures a light theme baseline across all browsers */
 }
 
-/* Reset default margins */
 body {
   margin: 0;
   font-family: 'Lato', Arial, sans-serif;
-  font-weight: 300; /* Light */
+  font-weight: 300;
   font-size: 1.2rem;
   line-height: 1.6;
 }
@@ -16,7 +18,7 @@ h1 {
   font-weight: 400;
   text-align: left;
   font-family: 'Caveat', cursive;
-  font-feature-settings: "calt" 0, "liga" 0; 
+  font-feature-settings: "calt" 0, "liga" 0;
   -moz-font-feature-settings: "calt" 0, "liga" 0;
   -webkit-font-feature-settings: "calt" 0, "liga" 0;
 }
@@ -26,7 +28,13 @@ h2 {
   font-family: 'Lato', Arial, sans-serif;
 }
 
-/* Navigation bar */
+main {
+  padding: 2rem;
+}
+
+/* =========================================
+   2. NAVIGATION BAR
+========================================= */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -41,10 +49,9 @@ h2 {
   z-index: 1000;
 }
 
-/* Logo / Site Title */
 .navbar .logo {
   font-family: 'Caveat', cursive;
-  font-feature-settings: "calt" 0, "liga" 0; 
+  font-feature-settings: "calt" 0, "liga" 0;
   -moz-font-feature-settings: "calt" 0, "liga" 0;
   -webkit-font-feature-settings: "calt" 0, "liga" 0;
   font-size: 2.25rem;
@@ -55,7 +62,6 @@ h2 {
   margin-right: 20px;
 }
 
-/* Links container */
 .navbar ul {
   list-style: none;
   display: flex;
@@ -64,7 +70,6 @@ h2 {
   padding: 0;
 }
 
-/* Individual links */
 .navbar a {
   text-decoration: none;
   color: #333;
@@ -80,7 +85,6 @@ h2 {
   color: #000;
 }
 
-/* Hamburger button */
 .menu-toggle {
   display: none;
   font-size: 2rem;
@@ -97,58 +101,9 @@ h2 {
   padding: 0;
 }
 
-/* ---------------------------------
-   LANDING PAGE (VISUALIZER) STYLES
------------------------------------- */
-#visualizer {
-  position: absolute;
-  top: 0;
-  left: 5%;
-  width: 90%;
-  height: 100%;
-  z-index: 1;
-  pointer-events: none; 
-}
-
-#bg-audio {
-  display: none;
-}
-
-.play-btn {
-  position: absolute;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: transparent;
-  border: none;
-  color: #888;
-  font-size: 1.2rem;
-  cursor: pointer;
-  padding: 10px;
-  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-  outline: none;
-  z-index: 10;
-}
-
-.play-btn.center-large {
-  bottom: calc(50% - 2rem); 
-  left: 50%;
-  font-size: 4rem;
-  opacity: 0.8;
-}
-
-.play-btn.center-large:hover {
-  transform: translateX(-50%) scale(1.1);
-  opacity: 1;
-}
-
-.play-btn:hover {
-  opacity: 0.6;
-}
-
-/* ---------------------------------
-   TEXT PAGES (ABOUT & BLOG) STYLES
------------------------------------- */
+/* =========================================
+   3. TEXT PAGES (ABOUT & BLOG)
+========================================= */
 .text-container {
   width: 100%;
   max-width: 550px;
@@ -197,9 +152,9 @@ h2 {
   opacity: 0.7;
 }
 
-/* ---------------------------------
-   MUSIC PAGE STYLES
------------------------------------- */
+/* =========================================
+   4. MUSIC PAGE (SCORES & RELEASES)
+========================================= */
 .section-subtitle {
   text-align: center;
   font-style: italic;
@@ -213,9 +168,8 @@ h2 {
   margin: 0 auto;
 }
 
-/* Score Component Styles */
 .composition-block {
-  max-width: 500px; 
+  max-width: 500px;
   margin: 0 auto 100px auto;
   display: flex;
   flex-direction: column;
@@ -223,7 +177,7 @@ h2 {
 }
 
 .score-container {
-  width: 100%; 
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 25px;
@@ -246,17 +200,15 @@ h2 {
   display: block;
 }
 
-/* Let the user know the image is clickable */
 .score-img.enlargeable {
   cursor: zoom-in;
 }
 
-/* Elegant Navigation Arrows */
 .nav-btn {
   position: absolute;
   top: 0;
   height: 100%;
-  width: 12%; 
+  width: 12%;
   background: transparent;
   border: none;
   font-size: 2.5rem;
@@ -278,95 +230,72 @@ h2 {
 .prev { left: 0; }
 .next { right: 0; }
 
-/* The Audio Player - Set to 100% of the container */
-.custom-player {
-  width: 100%;
-  height: 40px;
-  background-color: #ffffff;
-  color-scheme: light;
-}
-
-audio::-webkit-media-controls-play-button,
-audio::-webkit-media-controls-panel {
-  background-color: #ffffff;
-  color: #ffffff;
-}
-
-/* Main content padding */
-main {
-  padding: 2rem;
-}
-
-
-/* ---------------------------------
-   LIGHTBOX STYLES
------------------------------------- */
-.lightbox {
-  display: none; 
-  position: fixed;
-  z-index: 9999;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0.95); 
+/* =========================================
+   5. CUSTOM AUDIO PLAYER
+========================================= */
+.custom-audio-player {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  backdrop-filter: blur(5px); 
+  gap: 15px;
+  width: 100%;
+  padding: 5px 0;
 }
 
-.lightbox-content {
-  position: relative;
-  width: 95%;
-  height: 95%;
+.play-pause-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.1rem;
+  color: #000;
+  cursor: pointer;
+  padding: 0;
+  width: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
+  outline: none;
 }
 
-.lightbox-img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain; 
-  box-shadow: 0 15px 50px rgba(0,0,0,0.15); 
-  border-radius: 4px;
+.play-pause-btn:hover {
+  opacity: 0.6;
 }
 
-.lightbox-close {
-  position: absolute;
-  top: 20px;
-  right: 30px;
-  font-size: 3rem;
-  color: #666;
+.time-display {
+  font-family: Arial, sans-serif;
+  font-size: 0.95rem;
+  color: #555;
+  white-space: nowrap;
+}
+
+.seek-bar {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  background: #e0e0e0;
+  height: 4px;
+  border-radius: 2px;
+  outline: none;
   cursor: pointer;
-  background: none;
-  border: none;
-  z-index: 10000;
-  transition: color 0.3s ease;
 }
 
-.lightbox-close:hover {
-  color: #000;
-}
-
-/* Adapt the navigation arrows specifically for the Lightbox */
-.lightbox-nav {
-  position: static;
-  width: auto;
-  padding: 0 30px;
-  height: auto;
-  color: #aaa;
-}
-
-.lightbox-nav:hover {
-  color: #333;
+/* Hide the default slider thumb (ball) for the custom audio player */
+.seek-bar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 0;
+  height: 0;
   background: transparent;
 }
 
+.seek-bar::-moz-range-thumb {
+  width: 0;
+  height: 0;
+  border: none;
+  background: transparent;
+}
 
-/* ---------------------------------
-   RELEASES SHOWCASE STYLES
------------------------------------- */
+/* =========================================
+   6. RELEASES SHOWCASE STYLES
+========================================= */
 .releases-container {
   width: 100%;
   max-width: 650px;
@@ -384,16 +313,23 @@ main {
 }
 
 .release-media {
-  flex: 0 0 250px; 
+  flex: 0 0 250px;
   display: flex;
   justify-content: center;
+}
+
+.bandcamp-iframe {
+  border: 0;
+  width: 230px;
+  height: 230px;
+  overflow: hidden;
 }
 
 .release-img {
   width: 100%;
   max-width: 230px;
   height: auto;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08); 
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
   border-radius: 2px;
 }
 
@@ -404,10 +340,18 @@ main {
   align-items: flex-start;
 }
 
-.cosmophony-title {
-  font-family: 'Major Mono Display', monospace; 
-  font-weight: 100; 
+.release-info h1 {
   margin: 0;
+}
+
+.cosmophony-title {
+  font-family: 'Major Mono Display', monospace;
+  font-weight: 100;
+}
+
+.release-info p {
+  margin-top: 0.5rem;
+  margin-bottom: 0;
 }
 
 .button-group {
@@ -435,9 +379,74 @@ main {
   color: #ffffff;
 }
 
-/* ---------------------------------
-   MOBILE RESPONSIVE (DO NOT MOVE)
------------------------------------- */
+/* =========================================
+   7. LIGHTBOX STYLES
+========================================= */
+.lightbox {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.95);
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(5px);
+}
+
+.lightbox-content {
+  position: relative;
+  width: 95%;
+  height: 95%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+  border-radius: 4px;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 3rem;
+  color: #666;
+  cursor: pointer;
+  background: none;
+  border: none;
+  z-index: 10000;
+  transition: color 0.3s ease;
+}
+
+.lightbox-close:hover {
+  color: #000;
+}
+
+.lightbox-nav {
+  position: static;
+  width: auto;
+  padding: 0 30px;
+  height: auto;
+  color: #aaa;
+}
+
+.lightbox-nav:hover {
+  color: #333;
+  background: transparent;
+}
+
+
+/* =========================================
+   8. MOBILE RESPONSIVE (DO NOT MOVE)
+========================================= */
 @media (max-width: 800px) {
   .lightbox-nav {
     padding: 0 10px;
@@ -446,7 +455,7 @@ main {
 
 @media (max-width: 600px) {
   .navbar {
-    padding: 0.2rem 1rem; 
+    padding: 0.2rem 1rem;
   }
 
   .navbar ul {
@@ -454,14 +463,14 @@ main {
   }
 
   .menu-toggle {
-    display: block; 
+    display: block;
   }
 
   .navbar .nav-links {
-    display: none; 
+    display: none;
     flex-direction: column;
     position: absolute;
-    top: 60px; 
+    top: 60px;
     right: 0;
     background: #fff;
     padding: 1rem 1rem;
@@ -469,8 +478,8 @@ main {
   }
 
   .navbar .nav-links.show {
-    display: flex; 
-    gap: 1rem;  
+    display: flex;
+    gap: 1rem;
   }
 
   /* Responsive changes for releases */
