@@ -12,7 +12,7 @@ h1 {
   font-weight: 400;
   text-align: left;
   font-family: 'Caveat', cursive;
-  font-feature-settings: "calt" 0, "liga" 0; /* turn off alternates and ligatures */
+  font-feature-settings: "calt" 0, "liga" 0; 
   -moz-font-feature-settings: "calt" 0, "liga" 0;
   -webkit-font-feature-settings: "calt" 0, "liga" 0;
 }
@@ -34,12 +34,13 @@ h2 {
   width: 100%;
   box-sizing: border-box;
   max-width: 100vw;
+  z-index: 1000;
 }
 
 /* Logo / Site Title */
 .navbar .logo {
   font-family: 'Caveat', cursive;
-  font-feature-settings: "calt" 0, "liga" 0; /* turn off alternates and ligatures */
+  font-feature-settings: "calt" 0, "liga" 0; 
   -moz-font-feature-settings: "calt" 0, "liga" 0;
   -webkit-font-feature-settings: "calt" 0, "liga" 0;
   font-size: 2.25rem;
@@ -92,10 +93,125 @@ h2 {
   padding: 0;
 }
 
+/* ---------------------------------
+   LANDING PAGE (VISUALIZER) STYLES
+------------------------------------ */
+#visualizer {
+  position: absolute;
+  top: 0;
+  left: 5%;
+  width: 90%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none; 
+}
+
+#bg-audio {
+  display: none;
+}
+
+.play-btn {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: transparent;
+  border: none;
+  color: #888;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 10px;
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  outline: none;
+  z-index: 10;
+}
+
+.play-btn.center-large {
+  bottom: calc(50% - 2rem); 
+  left: 50%;
+  font-size: 4rem;
+  opacity: 0.8;
+}
+
+.play-btn.center-large:hover {
+  transform: translateX(-50%) scale(1.1);
+  opacity: 1;
+}
+
+.play-btn:hover {
+  opacity: 0.6;
+}
+
+/* ---------------------------------
+   TEXT PAGES (ABOUT & BLOG) STYLES
+------------------------------------ */
+.text-container {
+  width: 100%;
+  max-width: 550px;
+  margin: 0 auto;
+  text-align: justify;
+}
+
+.date-stamp {
+  font-family: Arial, sans-serif;
+  font-size: 1rem;
+  color: #666;
+  margin-top: -1rem;
+  margin-bottom: 2rem;
+}
+
+.story-separator {
+  text-align: center;
+  margin: 2rem 0;
+  letter-spacing: 2px;
+}
+
+.about-img {
+  width: 100%;
+  display: block;
+}
+
+.contact-email {
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.social-links {
+  display: flex;
+  gap: 10px;
+}
+
+.social-icon {
+  width: 44px;
+  height: 44px;
+  display: inline-block;
+  transition: opacity 0.3s;
+}
+
+.social-icon:hover {
+  opacity: 0.7;
+}
+
+/* ---------------------------------
+   MUSIC PAGE STYLES
+------------------------------------ */
+.section-subtitle {
+  text-align: center;
+  font-style: italic;
+  color: #555;
+  margin-bottom: 40px;
+}
+
+.gallery-container {
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+}
 
 /* Score Component Styles */
 .composition-block {
-  max-width: 500px; /* Adjust this to control global score width */
+  max-width: 500px; 
   margin: 0 auto 100px auto;
   display: flex;
   flex-direction: column;
@@ -103,7 +219,7 @@ h2 {
 }
 
 .score-container {
-  width: 100%; /* Ensures player and score are same width */
+  width: 100%; 
   display: flex;
   flex-direction: column;
   gap: 25px;
@@ -136,7 +252,7 @@ h2 {
   position: absolute;
   top: 0;
   height: 100%;
-  width: 12%; /* Wide hit area for easy clicking */
+  width: 12%; 
   background: transparent;
   border: none;
   font-size: 2.5rem;
@@ -170,44 +286,6 @@ audio::-webkit-media-controls-play-button,
 audio::-webkit-media-controls-panel {
   background-color: #ffffff;
   color: #ffffff;
-  }
-
-.player-row {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  width: 100%;
-}
-
-/* 🔽 Responsive layout */
-@media (max-width: 600px) {
-  .navbar {
-    padding: 0.2rem 1rem; /* shrink side padding */
-  }
-
-  .navbar ul {
-    display: none;
-  }
-
-  .menu-toggle {
-    display: block; /* show the hamburger */
-  }
-
-  .navbar .nav-links {
-    display: none; /* hidden by default */
-    flex-direction: column;
-    position: absolute;
-    top: 60px; /* below navbar */
-    right: 0;
-    background: #fff;
-    padding: 1rem 1rem;
-    box-shadow: -2px 5px 10px rgba(0,0,0,0.1);
-  }
-
-  .navbar .nav-links.show {
-    display: flex; /* toggle menu */
-    gap: 1rem;  /* <-- this controls vertical spacing */
-  }
 }
 
 /* Main content padding */
@@ -220,17 +298,17 @@ main {
    LIGHTBOX STYLES
 ------------------------------------ */
 .lightbox {
-  display: none; /* Hidden by default */
+  display: none; 
   position: fixed;
   z-index: 9999;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(255, 255, 255, 0.95); /* Elegant translucent white background */
+  background-color: rgba(255, 255, 255, 0.95); 
   align-items: center;
   justify-content: center;
-  backdrop-filter: blur(5px); /* Softly blurs the website behind it */
+  backdrop-filter: blur(5px); 
 }
 
 .lightbox-content {
@@ -245,8 +323,8 @@ main {
 .lightbox-img {
   max-width: 100%;
   max-height: 100%;
-  object-fit: contain; /* Ensures the whole page fits without stretching */
-  box-shadow: 0 15px 50px rgba(0,0,0,0.15); /* Adds a nice depth effect */
+  object-fit: contain; 
+  box-shadow: 0 15px 50px rgba(0,0,0,0.15); 
   border-radius: 4px;
 }
 
@@ -281,8 +359,132 @@ main {
   background: transparent;
 }
 
+
+/* ---------------------------------
+   RELEASES SHOWCASE STYLES
+------------------------------------ */
+.releases-container {
+  width: 100%;
+  max-width: 650px;
+  margin: 150px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+
+.release-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+
+.release-media {
+  flex: 0 0 250px; 
+  display: flex;
+  justify-content: center;
+}
+
+.release-img {
+  width: 100%;
+  max-width: 230px;
+  height: auto;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08); 
+  border-radius: 2px;
+}
+
+.release-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.cosmophony-title {
+  font-family: 'Major Mono Display', monospace; 
+  font-weight: 100; 
+  margin: 0;
+}
+
+.button-group {
+  display: flex;
+  gap: 15px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+}
+
+.elegant-btn {
+  display: inline-block;
+  text-decoration: none;
+  color: #333;
+  border: 1px solid #333;
+  padding: 8px 20px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.elegant-btn:hover {
+  background-color: #333;
+  color: #ffffff;
+}
+
+/* ---------------------------------
+   MOBILE RESPONSIVE (DO NOT MOVE)
+------------------------------------ */
 @media (max-width: 800px) {
   .lightbox-nav {
     padding: 0 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .navbar {
+    padding: 0.2rem 1rem; 
+  }
+
+  .navbar ul {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: block; 
+  }
+
+  .navbar .nav-links {
+    display: none; 
+    flex-direction: column;
+    position: absolute;
+    top: 60px; 
+    right: 0;
+    background: #fff;
+    padding: 1rem 1rem;
+    box-shadow: -2px 5px 10px rgba(0,0,0,0.1);
+  }
+
+  .navbar .nav-links.show {
+    display: flex; 
+    gap: 1rem;  
+  }
+
+  /* Responsive changes for releases */
+  .release-item {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .release-info {
+    align-items: center;
+  }
+
+  .release-info h1, .cosmophony-title {
+    text-align: center;
+  }
+
+  .button-group {
+    justify-content: center;
   }
 }

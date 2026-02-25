@@ -123,8 +123,8 @@
 
   <main>
     <!--<h2 style="text-align:center; font-style: italic; font-weight: 300;">Featured works</h2>-->
-    <p style="text-align:center; font-style: italic; color: #555; margin-bottom: 40px;">Featured works</p>
-    <div style="width:100%; max-width:1300px; margin: 0 auto;">
+    <p class="section-subtitle">Featured works</p>
+    <div class="gallery-container">
 
       <!-- La noia i la mar -->
       <section class="composition-block" id="noia-section">
@@ -195,32 +195,40 @@
         </div>
       </section>
 
-      <table style="width:100%; max-width:650px; margin:100px auto 0; margin-top:150px; margin-bottom: 150px;">
-        <tr>
-          <td >
-            <div align="center">
-              <iframe scrolling="no" style="margin-top:30px; border: 0; width: 230px; height: 230px; overflow: hidden;" src="https://bandcamp.com/EmbeddedPlayer/album=1111767708/size=large/bgcol=ffffff/linkcol=333333/minimal=true/transparent=true/" seamless></iframe>
+
+      <div class="releases-container">
+        
+        <!-- Cosmophony -->
+        <div class="release-item">
+          <div class="release-media">
+            <iframe scrolling="no" style="border: 0; width: 230px; height: 230px; overflow: hidden;" src="https://bandcamp.com/EmbeddedPlayer/album=1111767708/size=large/bgcol=ffffff/linkcol=333333/minimal=true/transparent=true/" seamless></iframe>
+          </div>
+          <div class="release-info">
+            <h1 style="font-family: 'Major Mono Display'; font-weight: 100; margin: 0;">cosmophony</h1>
+            <p>Astrophysics and music meet in this album.<br>A journey through the universe.</p>
+            <div class="button-group">
+              <a href="https://victoralamo.bandcamp.com/album/cosmophony" target="_blank" class="elegant-btn">Listen on Bandcamp</a>
             </div>
-          </td>
-          <td >
-            <h1 style="font-family: 'Major Mono Display'; font-weight: 100; margin-bottom: 0rem;">cosmophony</h1>
-            <p style="margin-top: 0rem;">Astrophysics and music meet in this album.</p>
-            <p>A journey through the universe and a reflection about existence.</p>
-            <p><b>Find the album <a href="https://victoralamo.bandcamp.com/album/cosmophony" target="_blank" style="text-decoration: underline; color:black">here</a></b></p>
-          </td>
-        </tr>
-        <tr>
-          <td style="padding-top: 40px;">
-            <img width=100% src="Little piano pieces.jpg" role="img">
-          </td>
-          <td style="min-width:300px; padding-top: 40px;">
+          </div>
+        </div>
+
+        <!-- Little Piano Pieces -->
+        <div class="release-item">
+          <div class="release-media">
+            <!-- Added a subtle box shadow to the book cover to match the score viewport style -->
+            <img src="Little piano pieces.jpg" alt="Little piano pieces" class="release-img">
+          </div>
+          <div class="release-info">
             <h1>Little piano pieces</h1>
             <p>A collection of minimalist piano pieces.<br>Available in PDF or as a printed book.</p>
-            <a href="https://www.amazon.com/dp/B0CY2CLN5X" target="_blank" style="display:inline-block; margin:10px 0; text-decoration: none; color: black; border: 2px solid black; padding: 10px; border-radius: 5px; font-weight: bold;">Purchase printed book</a>
-            <a href="https://payhip.com/b/3u0r4" target="_blank" style="display:inline-block; margin:10px 0; text-decoration: none; color: black; border: 2px solid black; padding: 10px; border-radius: 5px; font-weight: bold;">Purchase pdf</a>
-          </td>
-        </tr>
-      </table>
+            <div class="button-group">
+              <a href="https://www.amazon.com/dp/B0CY2CLN5X" target="_blank" class="elegant-btn">Printed book</a>
+              <a href="https://payhip.com/b/3u0r4" target="_blank" class="elegant-btn">Purchase PDF</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
   </main>
 
