@@ -21,6 +21,7 @@ h1 {
   font-feature-settings: "calt" 0, "liga" 0;
   -moz-font-feature-settings: "calt" 0, "liga" 0;
   -webkit-font-feature-settings: "calt" 0, "liga" 0;
+  line-height: 1.1;
 }
 
 h2 {
@@ -177,7 +178,7 @@ main {
   font-family: Arial, sans-serif;
   font-size: 1rem;
   color: #666;
-  margin-top: -1rem;
+  margin-top: -1.25rem;
   margin-bottom: 2rem;
 }
 
@@ -407,6 +408,7 @@ main {
 
 .release-info h1 {
   margin: 0;
+  line-height: 1;
 }
 
 .cosmophony-title {
@@ -415,7 +417,7 @@ main {
 }
 
 .release-info p {
-  margin-top: 0.5rem;
+  margin-top: 1.5rem; /* Increased to restore the spacing lost by reducing the title's line-height */
   margin-bottom: 0;
 }
 
@@ -513,8 +515,21 @@ main {
    8. MOBILE RESPONSIVE (DO NOT MOVE)
 ========================================= */
 @media (max-width: 800px) {
+  /* Overlay the arrows on the left and right edges for mobile screens */
   .lightbox-nav {
-    padding: 0 10px;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 15%; /* Generous touch target size */
+    padding: 0;
+  }
+  
+  .lightbox-nav.prev {
+    left: 0;
+  }
+  
+  .lightbox-nav.next {
+    right: 0;
   }
 }
 
