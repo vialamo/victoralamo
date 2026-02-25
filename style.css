@@ -17,7 +17,7 @@ h1 {
   font-size: 3rem;
   text-align: left;
   font-weight: 400;
-  font-family: 'Nothing you could do', 'Caveat', cursive;
+  font-family: 'Nothing you could do', cursive;
   font-feature-settings: "calt" 0, "liga" 0;
   -moz-font-feature-settings: "calt" 0, "liga" 0;
   -webkit-font-feature-settings: "calt" 0, "liga" 0;
@@ -62,7 +62,7 @@ main {
 
 .navbar .logo {
   
-  font-family: 'Nothing you could do', 'Caveat', cursive;
+  font-family: 'Nothing you could do', cursive;
   font-size: 2rem;
   /*font-family: 'Caveat', cursive;
   font-size: 2.25rem;*/
@@ -386,7 +386,7 @@ main {
 
 .release-item {
   display: flex;
-  align-items: center;
+  align-items: top;
   justify-content: center;
   gap: 40px;
 }
@@ -424,8 +424,8 @@ main {
   line-height: 1;
 }
 
-.cosmophony-title {
-  font-family: 'Major Mono Display', monospace;
+.release-title {
+  font-family: 'Raleway', sans-serif;
   font-weight: 100;
 }
 
