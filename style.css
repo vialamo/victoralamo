@@ -7,26 +7,36 @@
 
 body {
   margin: 0;
-  font-family: 'Lato', Arial, sans-serif;
+  font-family: 'Raleway', sans-serif; /*'Lato', Arial, sans-serif;*/
   font-weight: 300;
-  font-size: 1.2rem;
-  line-height: 1.6;
+  font-size: 1.125rem;
+  line-height: 1.65;
 }
 
 h1 {
   font-size: 3rem;
-  font-weight: 400;
   text-align: left;
-  font-family: 'Caveat', cursive;
+  font-weight: 400;
+  font-family: 'Nothing you could do', 'Caveat', cursive;
   font-feature-settings: "calt" 0, "liga" 0;
   -moz-font-feature-settings: "calt" 0, "liga" 0;
   -webkit-font-feature-settings: "calt" 0, "liga" 0;
   line-height: 1.1;
+
+  /*font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  letter-spacing: 1.5px;
+  color: #222;*/
 }
 
 h2 {
+  font-family: 'Raleway', sans-serif;
+  /*font-weight: 300;
+  letter-spacing: 1.5px;
+  color: #222;*/
+
   font-weight: 400;
-  font-family: 'Lato', Arial, sans-serif;
+  /*font-family: 'Lato', Arial, sans-serif;*/
 }
 
 main {
@@ -51,11 +61,14 @@ main {
 }
 
 .navbar .logo {
-  font-family: 'Caveat', cursive;
+  
+  font-family: 'Nothing you could do', 'Caveat', cursive;
+  font-size: 2rem;
+  /*font-family: 'Caveat', cursive;
+  font-size: 2.25rem;*/
   font-feature-settings: "calt" 0, "liga" 0;
   -moz-font-feature-settings: "calt" 0, "liga" 0;
   -webkit-font-feature-settings: "calt" 0, "liga" 0;
-  font-size: 2.25rem;
   font-weight: 100;
   color: #333;
   text-decoration: none;
