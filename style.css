@@ -121,11 +121,13 @@ main {
 #visualizer {
   position: absolute;
   top: 0;
-  left: 5%;
+  left: 50%;
+  transform: translateX(-50%); /* Pulls it exactly into the center */
   width: 90%;
+  max-width: 600px;
   height: 100%;
   z-index: 1;
-  pointer-events: none; /* Lets clicks pass through to the button */
+  pointer-events: none;
 }
 
 /* Container for the UI elements */
